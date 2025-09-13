@@ -52,6 +52,16 @@ void print_primes(int n){
     }	
       return 1;
   }
+
+
+  void print_sieves(int n){
+    if (n < 2) return;
+
+    for(int i = 2; (long,long) i*i < n; i++){
+      if
+
+    }
+  }
 // 'argc' contains the number of program arguments, and
 // 'argv' is an array of char pointers, where each
 // char pointer points to a null-terminated string.
