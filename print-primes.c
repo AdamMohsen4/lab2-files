@@ -55,12 +55,32 @@ void print_primes(int n){
 
 
   void print_sieves(int n){
+
+    int counter = 0;
+
     if (n < 2) return;
 
-    for(int i = 2; (long,long) i*i < n; i++){
-      if
+    unsigned char a[n];
+    for(int i = 0; i < n; i++) a[i] = 0;
 
+    for(int i = 2; i*i < n; i++){
+    
+      if (a[i-1] == 0){
+        for(int j = i*i; j <= n; j += i){
+          a[j-1] = 1;
+        }
+      }
     }
+    for(int i = 2; i < n; i++){
+
+      if (a[i-1] == 0){
+        counter++;
+        print_number(i);
+        if(counter % COLUMNS == 0)
+          printf("\n");
+      }
+    }
+    printf("\n");
   }
 // 'argc' contains the number of program arguments, and
 // 'argv' is an array of char pointers, where each
@@ -68,7 +88,8 @@ void print_primes(int n){
 int main(int argc, char *argv[]){
     if(argc == 2)
     {
-        print_primes(atoi(argv[1]));
+         print_sieves(atoi(argv[1]));
+       
     }
   else
     printf("Please state an integer number.\n");
