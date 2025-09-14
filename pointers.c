@@ -5,6 +5,13 @@
  This file is in the public domain.
 */
 
+/*
+Syntax for pointers in C: 
+  type *name;  // Declare a pointer variable
+  name = &var; // Get the address of a variable
+  *name = value; // Set the value at the address
+  value = *name; // Get the value at the address
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,6 +32,11 @@ void endian_proof(const char* c){
   printf("\nEndian experiment: 0x%02x,0x%02x,0x%02x,0x%02x\n", 
          (int)*c,(int)*(c+1), (int)*(c+2), (int)*(c+3));
   
+}
+
+void work(){
+
+
 }
 
 int main(void){
