@@ -6,6 +6,7 @@
 */
 
 /*
+A pointer is a variable that stores the address of another variable.
 Syntax for pointers in C: 
   type *name;  // Declare a pointer variable
   name = &var; // Get the address of a variable
@@ -16,9 +17,14 @@ Syntax for pointers in C:
 #include <stdio.h>
 #include <stdlib.h>
 
-char* text1 = "This is a string.";
+// Declaring two string and two list, and a counter variable. 
+char* text1 = "This is a string."; 
 char* text2 = "Yet another thing.";
-
+int list1[20] = {0};  // Match assembly: 80 bytes / 4 bytes per int = 20 ints
+int list2[20] = {0};  // Match assembly: 80 bytes / 4 bytes per int = 20 ints
+int counter = 0;
+void work();
+void copycodes(const char* scr, int* dst);
 void printlist(const int* lst){
   printf("ASCII codes and corresponding characters.\n");
   while(*lst != 0){
@@ -36,9 +42,31 @@ void endian_proof(const char* c){
 
 void work(){
 
+  // Create pointers to the strings and the lists.
+  // Call copycodes() twice, once for each string/list pair.
+  // After each call, the variable "counter" should contain
+  // the number of characters copied so far.
 
+  char* src1 = text1; // pointer to the string (source)
+  int* dst1 = list1; // pointer to the list (destination)
+  copycodes(src1, dst1); // Call copycodes to copy from src1 to dst1
+  char* src2 = text2; 
+  int* dst2 = list2; 
+  copycodes(src2, dst2);
 }
 
+void copycodes(const char* scr, int* dst){
+  // Copy characters from the string 'src' to the list 'dst'
+  // until the null-character is reached.
+  // Return the number of characters copied.
+
+  while(*scr != 0) {
+    *dst = (int)*scr; // * Copy the ASCII code of the character (in assembly: sw - store word)
+    scr++;            // * Move to the next character
+    dst++;            // * Move to the next position in the list (4 bytes in assembly)
+    counter++;       // 
+  }
+}
 int main(void){
  
     work();
