@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define COLUMNS 6
 /*
@@ -14,9 +15,12 @@
   */
   void print_sieves(int n){
 
+    clock_t start = clock();
+    double cpu_time_used;
     int counter = 0;
 
     if (n < 2) return;
+
     unsigned char *a = malloc(n * sizeof(unsigned char));  // malloc(size) => pointer to allocated memory
 
     for(int i = 0; i < n; i++) a[i] = 1; // Initialize all elements to 1 (prime)
@@ -42,6 +46,10 @@
     printf("\n");
 
     free(a); //Freeing the heap allocated memory
+
+    clock_t end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("Time taken: %f seconds\n", cpu_time_used);
   }
 
 

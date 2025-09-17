@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #define COLUMNS 6
+
 /*
  Prints a number 'num' with a specific format.
 */
@@ -13,10 +14,14 @@
   Checks if a number 'n' is prime using Sieves algorithm.
   */
 
+
   void print_sieves(int n){
 
-    int counter = 0;
+   int d_counter = 0;
+   int last_prime = 1;
 
+    int counter = 0;
+   
     if (n < 2) return;
 
     unsigned char a[n]; //unsigned char array to mark non-prime numbers (non-negative values)
@@ -25,16 +30,25 @@
 
     for(int i = 2; i*i < n; i++){ 
       // Mark multiples of i as non-prime
-      if (a[i-1] == 1){  // If i is prime
+      if (a[i-1] == 1){ 
         // Mark all multiples of i as non-prime
         for(int j = i*i; j <= n; j += i){
           a[j-1] = 0;
         }
+         
+      
       }
+
     }
     // Print prime numbers
     for(int i = 2; i < n; i++){
+
       if (a[i-1] == 1){
+         if(last_prime != 0 && (i - last_prime) == 4){
+       
+            d_counter++;
+        }
+        last_prime = i;
         counter++;
         print_number(i);
         if(counter % COLUMNS == 0)
@@ -42,6 +56,10 @@
       }
     }
     printf("\n");
+
+    printf("%10d", d_counter);
+
+
   }
 
 
@@ -52,7 +70,6 @@ int main(int argc, char *argv[]){
     if(argc == 2)
     {
          print_sieves(atoi(argv[1]));
-       
     }
   else
     printf("Please state an integer number bludclot battyboy.\n");

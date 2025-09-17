@@ -17,14 +17,15 @@ Syntax for pointers in C:
 #include <stdio.h>
 #include <stdlib.h>
 
-// Declaring two string and two list, and a counter variable. 
+// Declaration of two strings, two lists, and a counter variable.
 char* text1 = "This is a string."; 
 char* text2 = "Yet another thing.";
-int list1[20] = {0};  // Match assembly: 80 bytes / 4 bytes per int = 20 ints
-int list2[20] = {0};  // Match assembly: 80 bytes / 4 bytes per int = 20 ints
+int list1[20] = {0};  // Match assembly: 80 bytes / 4 bytes per int = 20 ints. 
+int list2[20] = {0};  
 int counter = 0;
 void work();
 void copycodes(const char* scr, int* dst);
+
 void printlist(const int* lst){
   printf("ASCII codes and corresponding characters.\n");
   while(*lst != 0){
@@ -60,11 +61,11 @@ void copycodes(const char* scr, int* dst){
   // until the null-character is reached.
   // Return the number of characters copied.
 
-  while(*scr != 0) {
-    *dst = (int)*scr; // * Copy the ASCII code of the character (in assembly: sw - store word)
+  while((*scr & 0xFF) != 0) {  
+    *dst = (int)*scr; // * Copy the ASCII code of the character (in assembly: sw - store word). 
     scr++;            // * Move to the next character
     dst++;            // * Move to the next position in the list (4 bytes in assembly)
-    counter++;       // 
+    counter++;       
   }
 }
 int main(void){
